@@ -8,9 +8,10 @@ public class Subject {
     @Id
     private int subjectId;
     private String subjectName;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "authorId")
     private Author author;
+    private static int counter=0;
 
     public Author getAuthor() {
         return author;
@@ -20,10 +21,9 @@ public class Subject {
         this.author = author;
     }
 
-    public Subject(int subjectId, String subjectName) {
-        this.subjectId = subjectId;
+    public Subject(String subjectName) {
+        this.subjectId=++counter;
         this.subjectName = subjectName;
-//        this.author = author;
     }
     public Subject(){
         subjectId=0;
