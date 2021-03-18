@@ -3,6 +3,9 @@ package dabral.rajdeep.springDataJpaPart3;
 import dabral.rajdeep.springDataJpaPart3.ManyToMany.Repository.AuthorManyToManyRepository;
 import dabral.rajdeep.springDataJpaPart3.ManyToMany.entities.AuthorManyToMany;
 import dabral.rajdeep.springDataJpaPart3.ManyToMany.entities.BookManyToMany;
+import dabral.rajdeep.springDataJpaPart3.OneToMany.entities.AuthorOneToMany;
+import dabral.rajdeep.springDataJpaPart3.OneToMany.entities.BookOneToMany;
+import dabral.rajdeep.springDataJpaPart3.OneToMany.repository.AuthorOneToManyRepository;
 import dabral.rajdeep.springDataJpaPart3.OneToOne.Repository.BookOneToOneRepository;
 import dabral.rajdeep.springDataJpaPart3.OneToOne.entities.AuthorOneToOne;
 import dabral.rajdeep.springDataJpaPart3.OneToOne.entities.BookOneToOne;
@@ -31,6 +34,9 @@ class SpringDataJpaPart3ApplicationTests {
 
 	@Autowired
 	AuthorManyToManyRepository authorManyToManyRepository;
+
+	@Autowired
+	AuthorOneToManyRepository authorOneToManyRepository;
 
 	@Test
 	void contextLoads() {
@@ -94,8 +100,23 @@ class SpringDataJpaPart3ApplicationTests {
 	7. Implement One to Many Mapping between Author and Book(Unidirectional, BiDirectional and without additional table )
 		and implement cascade save.
 	*/
-	
-
+	@Test
+	public void testAuthorOneToManyMapping(){
+		AuthorOneToMany author1 = new AuthorOneToMany();
+		author1.setAuthorName("rajdeep");
+		BookOneToMany book1 = new BookOneToMany();
+		book1.setBookName("maths");book1.setAuthor(author1);
+		BookOneToMany book2 = new BookOneToMany();
+		book2.setBookName("computer");book2.setAuthor(author1);
+		BookOneToMany book3 = new BookOneToMany();
+		book3.setBookName("Chemistry");book3.setAuthor(author1);
+		BookOneToMany book4 = new BookOneToMany();
+		book4.setBookName("IP");book4.setAuthor(author1);
+		List<BookOneToMany> bookList1 = new LinkedList<>();
+		bookList1.add(book1);bookList1.add(book2);bookList1.add(book3);bookList1.add(book4);
+		author1.setBookList(bookList1);
+		authorOneToManyRepository.save(author1);
+	}
 
 
 

@@ -49,3 +49,25 @@ Desc author_Book_ManyToMany
 select * from author_Book_ManyToMany
 delete from author_Book_ManyToMany
 
+
+
+
+
+
+create table authorOneToMany(
+authorId integer primary key auto_increment,
+authorName varchar(50))
+
+select * from authorOneToMany
+delete from authorOneToMany
+
+create table bookOneToMany(
+bookId integer primary key auto_increment,
+bookName varchar(50),
+author_id integer,
+foreign key (author_Id) references authorOneToMany(authorId)
+)
+
+select * from bookOneToMany
+delete from bookOneToMany
+
